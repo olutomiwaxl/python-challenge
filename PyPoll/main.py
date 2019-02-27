@@ -47,6 +47,19 @@ cp = round(((correy_t / total) * 100),4)
 lp = round(((li_t / total) * 100),4)
 tp = round(((tooley_t / total) * 100),4)
 
+# put all percentages in a list and find the highest
+perc_list = [kp, cp, lp, tp]
+maximum = max(perc_list)
+#find the winning percentage and match to a variable "winner" with the candidate name
+if kp == maximum:
+        winner = "Khan"
+if cp == maximum:
+        winner = "Correy"
+if lp == maximum:
+        winner = "Li"
+if tp == maximum:
+        winner = "O'Tooley"
+
 # print output
 print("Election Results")
 print("------------------------------------")
@@ -57,7 +70,7 @@ print("Correy:  " + str(cp) + "% " + "(" + str(correy_t) + ")")
 print("Li:  " + str(lp) + "% " + "(" + str(li_t) + ")")
 print("O'Tooley:  " + str(tp) + "% " + "(" + str(tooley_t) + ")")
 print("------------------------------------")
-print("Winner: Khan ")
+print("Winner: " + winner)
 
 # write output into  a text file 
 f = open("output.txt","w+")  
@@ -70,6 +83,6 @@ f.write("Correy:  " + str(cp) + "% " + "(" + str(correy_t) + ")\n")
 f.write("Li:  " + str(lp) + "% " + "(" + str(li_t) + ")\n")
 f.write("O'Tooley:  " + str(tp) + "% " + "(" + str(tooley_t) + ")\n")
 f.write("------------------------------------\n")
-f.write("Winner: Khan  \n")
+f.write("Winner: " + winner + " \n")
 f.write("------------------------------------\n")  
 f.close()
