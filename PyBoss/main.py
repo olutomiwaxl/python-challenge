@@ -1,8 +1,11 @@
+#import libraries
 import os
 import csv 
-import datetime
 
+#read csv
 csvpath = os.path.join("..", "Resources", "employee_data.csv")
+
+#define empty lists
 Emp_ID = []
 Name = []
 DOB = []
@@ -11,6 +14,7 @@ State = []
 First_name = []
 Last_name = []
 date_formatted = []
+#use state libraries
 us_state_abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -63,6 +67,7 @@ us_state_abbrev = {
     'Wisconsin': 'WI',
     'Wyoming': 'WY',
 }
+#read csv document and append to lists 
 with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     header = next(csvreader)
@@ -71,20 +76,23 @@ with open(csvpath, newline="") as csvfile:
         Name.append(row[1])
         date = row[2]
         date_split = date.split("-")
+        #use new date format
         date_formatted.append(f"{date_split[1]}/{date_split[2]}/{date_split[0]}")
         ssn = row[3]
+        #star out the first 5 characters of SSN
         ssn_split = ssn.split("-")
         SSN_new.append(f"***-**-{ssn_split[2]}")
         State.append(us_state_abbrev[row[4]])  
+#split the name into two lists
     for i in Name:
         First_name.append(i.split(" ")[0])
         Last_name.append(i.split(" ")[1])
     
-
+#zip all lists together
 roster = zip(Emp_ID, First_name, Last_name, date_formatted, SSN_new, State)
 
 output_file = os.path.join("output.csv")
-
+#write output file
 with open(output_file, "w", newline="") as datafile:
     writer = csv.writer(datafile)
 
